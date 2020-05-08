@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = ".;communication";
+
+import "google/protobuf/empty.proto";
+package communication;
+
+// The greeting service definition.
+service LoadBalancer {
+  // Sends a greeting
+  rpc Register (RegisterRequest) returns (google.protobuf.Empty) {}
+  rpc DeRegister (DeRegisterRequest) returns (google.protobuf.Empty) {}
+}
+
+// The request message containing the user's name.
+message RegisterRequest {
+  string addr = 1;
+}
+
+// The response message containing the greetings
+message DeRegisterRequest {
+  string addr = 1;
+}

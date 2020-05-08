@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option go_package = ".;communication";
+
+import "google/protobuf/empty.proto";
+package communication;
+
+// The greeting service definition.
+service Worker {
+  // Sends a greeting
+  rpc CreateBankAccount (CreateBankAccountRequest) returns (Account) {}
+  rpc FetchBankAccount (FetchBankAccountRequest) returns (Account) {}
+  rpc DeleteBankAccount (DeleteBankAccountRequest) returns (google.protobuf.Empty) {}
+
+  rpc CreateExpense (CreateExpenseRequest) returns (Expense) {}
+  rpc FetchExpense (FetchExpenseRequest) returns (Expense) {}
+  rpc DeleteExpense (DeleteExpenseRequest) returns (google.protobuf.Empty) {}
+}
+
+message CreateBankAccountRequest {
+  int32 userID = 1;
+  string name = 2;
+}
+
+message FetchBankAccountRequest {
+  int32 userID = 1;
+  int32 accountID = 2;
+}
+
+message DeleteBankAccountRequest {
+  int32 userID = 1;
+  int32 accountID = 2;
+}
+
+message Account {
+  int32 userID = 1;
+  int32 accountID = 2;
+  string name = 3;
+  int32 totalAmount = 4;
+}
+
+message Expense {
+  int32 accountID = 1;
+  string name = 2;
+  int32 amount = 3; 
+  int32 expenseID = 4;
+}
+
+message CreateExpenseRequest {
+  int32 accountID = 1;
+  string name = 2;
+  int32 amount = 3;
+  int32 userID = 4;
+}
+
+message FetchExpenseRequest {
+  int32 userID = 1;
+  int32 expenseID = 3;
+}
+
+message DeleteExpenseRequest {
+  int32 userID = 1;
+  int32 expenseID = 3;
+}
